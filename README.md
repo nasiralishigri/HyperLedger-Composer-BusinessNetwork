@@ -1,8 +1,12 @@
 # HyperLedger-Composer-BusinessNetwork
 
- First run Fabric . steps given  https://github.com/nasiralishigri/Hyperledger-Composer
+ First run Fabric .
+       
+       steps given at  https://github.com/nasiralishigri/Hyperledger-Composer
   
-  ./startFabric
+        ./startFabric
+        watch -n 0.1 'docker ps'
+  Open obove both command in different cmd windows of folder you worked
   and also running docker ps
 # Step One: Creating a business network structure
 The key concept for Hyperledger Composer is the business network definition (BND). It defines the data model, transaction logic and access control rules for your blockchain solution. To create a BND, we need to create a suitable project structure on disk.
@@ -176,5 +180,53 @@ Copy
 
      composer network ping --card admin@tutorial-network
 The composer network ping command requires a business network card to identify the network to ping.
+
+# Step Five: Generating a REST server
+Hyperledger Composer can generate a bespoke REST API based on a business network. For developing a web application, the REST API provides a useful layer of language-neutral abstraction.
+
+To create the REST API, navigate to the tutorial-network directory and run the following command:
+
+
+Copy
+
+    composer-rest-server
+    
+    Enter admin@tutorial-network as the card name.
+
+    Select never use namespaces when asked whether to use namespaces in the generated API.
+
+    Select No when asked whether to secure the generated API.
+
+    Select Yes when asked whether to enable event publication.
+
+    Select No when asked whether to enable TLS security.
+
+    The generated API is connected to the deployed blockchain and business network.
+
+# Step Six: Generating an application
+Hyperledger Composer can also generate an Angular 4 application running against the REST API.
+
+To create your Angular 4 application, navigate to tutorial-network directory and run the following command:
+
+
+Copy
+
+    yo hyperledger-composer:angular
+Select Yes when asked to connect to running business network.
+
+    Enter standard package.json questions (project name, description, author name, author email, license)
+
+    Enter admin@tutorial-network for the business network card.
+
+    Select Connect to an existing REST API
+
+    Enter http://localhost for the REST server address.
+
+    Enter 3000 for server port.
+
+    Select Namespaces are not used
+
+The Angular generator will then create the scaffolding for the project and install all dependencies. To run the application, navigate to your angular project directory and run npm start . This will fire up an Angular 4 application running against your REST API at http://localhost:4200 .
+
 
 
